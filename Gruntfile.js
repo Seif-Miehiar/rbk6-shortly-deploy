@@ -1,8 +1,16 @@
+/* eslint-disable camelcase */
 module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      options: {
+        separator: ';',
+      },
+      dist: {
+        src: ['./app/collections/links.js', './app/collections/users.js', './app/models/link.js', './app/models/user.js', './app/config.js', './lib/request-handler.js', './lib/utility.js', './public/client/app.js', './public/createLinkView.js', './public/client/link.js', './public/client/links.js', './public/client/linksView.js', './public/client/linkView.js', './public/client/router.js', './public/lib/backbone.js', './public/lib/handlebars.js', './public/lib/jquery.js', './public/lib/underscore.js', './test/ServerSpec.js', './server.js'],
+        dest: './dist/build.js',
+      },
     },
 
     mochaTest: {
@@ -21,11 +29,16 @@ module.exports = function (grunt) {
     },
 
     uglify: {
+      myTarget: {
+        files: {
+          './dist/build.js': ['./app/collections/links.js', './app/collections/users.js', './app/models/link.js', './app/models/user.js', './app/config.js', './lib/request-handler.js', './lib/utility.js', './public/client/app.js', './public/createLinkView.js', './public/client/link.js', './public/client/links.js', './public/client/linksView.js', './public/client/linkView.js', './public/client/router.js', './public/lib/backbone.js', './public/lib/handlebars.js', './public/lib/jquery.js', './public/lib/underscore.js', './test/ServerSpec.js', './server.js']
+        }
+      }
     },
 
     eslint: {
       target: [
-        // Add list of files to lint here
+        
       ]
     },
 
@@ -64,6 +77,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
 
+
   grunt.registerTask('server-dev', function (target) {
     grunt.task.run(['nodemon', 'watch']);
   });
@@ -75,7 +89,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'mochaTest'
   ]);
-
+ 
   grunt.registerTask('build', [
   ]);
 
